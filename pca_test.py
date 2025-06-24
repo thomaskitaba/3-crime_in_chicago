@@ -1,0 +1,30 @@
+#!/usr/bin/python3
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+
+import seaborn as sns
+import pandas as pd
+
+
+#import dataset
+
+df = pd.read_csv("crime-data-1000.csv")
+
+features = ['Latitude', 'Longitude', 'Ward', 'Community Area']
+# features = df.head()
+X = df[features].dropna()
+# print(X)
+
+
+scaled = StandardScaler()
+X_scaled = scaled.fit_transform(X)
+
+
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_scaled)
+sns.scatterplot(x=X_pca[:, 0], y=X_pca[:, 1])
+
+
+
+
+
